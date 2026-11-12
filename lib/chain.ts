@@ -5,6 +5,8 @@
  * themselves, so another chain (the pons starter on Robinhood Chain, any EVM chain) is mostly a new copy of this file.
  * See PORTING.md for the rest (the API client, the launch executor, the signer).
  */
+import type { Launchpad } from "./launchpad"
+
 export type ChainConfig = {
   /** the chain, as people say it ("Solana", "Robinhood Chain") */
   name: string
@@ -97,6 +99,8 @@ export type ChainConfig = {
     /** seconds after the create before any other buy (a launchpad that taxes its first seconds, e.g. Clanker's 20 s anti-snipe) */
     launchQuietS?: number
   }
+  /** the launchpads a launch can go to (lib/launchpad.ts); the first is the default */
+  launchpads: Launchpad[]
   features: {
     /** Solana: empty token accounts hold rent that "Close empty token accounts" recovers */
     tokenAccounts: boolean
@@ -120,10 +124,10 @@ export const chain: ChainConfig = {
   name: "BNB Chain",
   symbol: "BNB",
   launchpad: "Flap",
-  appName: "Flap launcher",
+  appName: "BNB launcher",
   suiteId: "bnb",
   logo: "/logos/chains/bnb.svg",
-  launchpadLogo: "/logos/launchpads/flap.png",
+  launchpadLogo: "/logos/chains/bnb.svg",
   explorer: { name: "BscScan", logo: "/logos/terminals/explorer.svg" },
   coinParam: "token",
   coinNoun: "token address",
@@ -166,5 +170,13 @@ export const chain: ChainConfig = {
   vanitySuffix: null,
   evm: { api: "/api/bnb", chainId: 56, ws: false, createVenue: "flap", exemptList: false, minBuy: 0.0001, totalSupply: 1_000_000_000, transferChain: "bnb" },
   // creator fees: the Flap tax processor pays the creator share; collectCreatorFee builds its dispatch()
+  launchpads: [
+    { id: "flap", name: "Flap", logo: "/logos/launchpads/flap.png", site: "https://flap.sh", note: "bonding curve → PancakeSwap, tax token (…7777): every buy and sell pays the tax, your share comes back as creator fees", body: { venue: "flap" }, coinUrl: (t) => `https://flap.sh/token/${t}`,
+      settings: [
+        { field: "tax.buyTaxBps", label: "Buy tax", kind: "number", default: "5", unit: "%", min: 1, max: 10, scale: 100, help: "1–10 %, fixed forever" },
+        { field: "tax.sellTaxBps", label: "Sell tax", kind: "number", default: "5", unit: "%", min: 1, max: 10, scale: 100, help: "1–10 %, fixed forever" },
+      ] },
+    { id: "four-meme", name: "four.meme", logo: "/logos/launchpads/fourmeme.png", site: "https://four.meme", note: "bonding curve → PancakeSwap at 18 BNB", body: { venue: "four-meme" }, coinUrl: (t) => `https://four.meme/token/${t}`, creatorFees: false, disabled: "four.meme refuses launches from servers right now (it answers our API's login with 403); trading four.meme coins works" },
+  ],
   features: { tokenAccounts: false, creatorFees: true, mayhem: false, sameBlock: false, pairs: false, holderRewards: false },
 }

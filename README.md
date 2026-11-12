@@ -5,6 +5,8 @@
 
 # bnb starter
 
+**Launchpads**, picked on the Launch page: **Flap** (tax tokens, your buy and sell tax) and **four.meme** (shown, but four.meme refuses launches from servers right now). Trading works on any Flap, four.meme or PancakeSwap coin priced in BNB.
+
 The official starter for launching on **Flap** (BNB Chain, chain id 56, native BNB) with the
 [TrenchyTools API](https://api.trenchy.tools/AGENTS.md). One Next.js app, one process, one `npm run dev`. The same app as
 the pump.fun and pons starters: the same pages, the same launch flow, a different `lib/chain.ts`.
