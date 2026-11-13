@@ -72,7 +72,7 @@ export type ChainConfig = {
   maxBundle: number
   /** the tip that carries a same-block bundle ("Jito tip"), or null when the chain has none */
   tipName: string | null
-  /** one line on how bundle buyers land, for the "?" of Bundle buyers (limits, lookup tables, …) */
+  /** one line on how the first buyers land, for the "?" of First buyers */
   bundleHelp: string
   /** a vanity address suffix the launchpad uses ("pump"), or null */
   vanitySuffix: string | null
@@ -166,7 +166,7 @@ export const chain: ChainConfig = {
   minGas: 0.0002,
   maxBundle: 16,
   tipName: null,
-  bundleHelp: "BNB Chain has no Jito: the bundle buys all go out the moment the create confirms, usually landing in the next block (a block is ~0.5 s). Flap coins are tax tokens: every buy and sell pays the coin's tax, and your share comes back as creator fees.",
+  bundleHelp: "BNB Chain has no Jito: the first buys all go out the moment the create confirms, usually landing in the next block (a block is ~0.5 s). Flap coins are tax tokens: every buy and sell pays the coin's tax, and your share comes back as creator fees.",
   vanitySuffix: null,
   evm: { api: "/api/bnb", chainId: 56, ws: false, createVenue: "flap", exemptList: false, minBuy: 0.0001, totalSupply: 1_000_000_000, transferChain: "bnb" },
   // creator fees: the Flap tax processor pays the creator share; collectCreatorFee builds its dispatch()
