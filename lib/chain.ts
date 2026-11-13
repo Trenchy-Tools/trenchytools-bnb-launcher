@@ -176,7 +176,7 @@ export const chain: ChainConfig = {
         { field: "tax.buyTaxBps", label: "Buy tax", kind: "number", default: "5", unit: "%", min: 1, max: 10, scale: 100, help: "1–10 %, fixed forever" },
         { field: "tax.sellTaxBps", label: "Sell tax", kind: "number", default: "5", unit: "%", min: 1, max: 10, scale: 100, help: "1–10 %, fixed forever" },
       ] },
-    { id: "four-meme", name: "four.meme", logo: "/logos/launchpads/fourmeme.png", site: "https://four.meme", note: "bonding curve → PancakeSwap at 18 BNB", body: { venue: "four-meme" }, coinUrl: (t) => `https://four.meme/token/${t}`, creatorFees: false, disabled: "four.meme refuses launches from servers right now (it answers our API's login with 403); trading four.meme coins works" },
+    { id: "four-meme", name: "four.meme", logo: "/logos/launchpads/fourmeme.png", site: "https://four.meme", note: "bonding curve → PancakeSwap at 18 BNB", body: { venue: "four-meme" }, coinUrl: (t) => `https://four.meme/token/${t}`, creatorFees: false, disabled: "four.meme blocks the region our API runs in (Cloudflare 403 on its create API); trading four.meme coins works", feeNote: "four.meme pays the tax recipient on every trade: nothing to claim" },
   ],
   features: { tokenAccounts: false, creatorFees: true, mayhem: false, sameBlock: false, pairs: false, holderRewards: false },
 }
